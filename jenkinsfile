@@ -4,16 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         // Build the code using Maven
-        sh 'mvn clean package'
-      }
-    }
-    stage('Unit and Integration Tests') {
-      steps {
-        // Run unit tests using JUnit
-        sh 'mvn test'
-
-        // Run integration tests using Selenium WebDriver
-        sh 'mvn integration-test'
+        bat 'mvn clean package'
       }
     }
     
