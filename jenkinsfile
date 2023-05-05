@@ -54,10 +54,10 @@ pipeline {
     // Configure the pipeline to send notification emails to a specified email address at the end of test and security scan stages
     // Replace <your-email-address> with the email address you want to send notifications to
     success {
-      mail to: '<your-email-address>', subject: 'Pipeline Success', body: 'The pipeline completed successfully.'
+      mail to: '<lamkachun1524@gmail.com>', subject: 'Pipeline Success', body: 'The pipeline completed successfully.'
     }
     failure {
-      mail to: '<your-email-address>', subject: 'Pipeline Failure', body: 'The pipeline failed. Please check the logs for more information.'
+      mail to: '<lamkachun1524@gmail.com>', subject: 'Pipeline Failure', body: 'The pipeline failed. Please check the logs for more information.'
     }
   }
 }
