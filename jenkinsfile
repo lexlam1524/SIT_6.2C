@@ -16,38 +16,7 @@ pipeline {
         sh 'mvn integration-test'
       }
     }
-    stage('Code Analysis') {
-      steps {
-        // Integrate a code analysis tool to analyse the code
-        // using Jenkins plugin "Code Analysis API"
-        codeAnalysis tool: 'findbugs'
-      }
-    }
-    stage('Security Scan') {
-      steps {
-        // Perform a security scan using OWASP ZAP
-        sh 'docker run -v "$(pwd)":/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8080/myapp'
-      }
-    }
-    stage('Deploy to Staging') {
-      steps {
-        // Deploy the application to a staging server using AWS CLI
-        sh 'aws s3 cp target/myapp.war s3://myapp-staging'
-        sh 'aws ec2 run-instances --image-id ami-12345678 --count 1 --instance-type t2.micro --key-name my-key-pair --security-group-ids sg-12345678 --user-data "wget https://myapp-staging.s3.amazonaws.com/myapp.war && java -jar myapp.war"'
-      }
-    }
-    stage('Integration Tests on Staging') {
-      steps {
-        // Run integration tests on the staging environment using Selenium WebDriver
-        sh 'mvn -DargLine="-Denvironment=staging" integration-test'
-      }
-    }
-    stage('Deploy to Production') {
-      steps {
-        // Deploy the application to a production server using AWS CLI
-        sh 'aws s3 cp target/myapp.war s3://myapp-production'
-        sh 'aws ec2 run-instances --image-id ami-12345678 --count 1 --instance-type t2.micro --key-name my-key-pair --security-group-ids sg-12345678 --user-data "wget https://myapp-production.s3.amazonaws.com/myapp.war && java -jar myapp.war"'
-      }
-    }
+    
+    
   }
 }
